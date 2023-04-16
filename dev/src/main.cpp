@@ -26,7 +26,7 @@
 #endif
 
 #ifndef GIT_COMMIT_INFOSTR
-#define GIT_COMMIT_INFOSTR __DATE__ "|unknown"
+#define GIT_COMMIT_INFOSTR __DATE__ "|" __TIME__ "|GP"
 #endif
 
 using namespace lobster;
@@ -79,8 +79,8 @@ int main(int argc, char* argv[]) {
             "lobster [ OPTIONS ] [ FILE ] [ -- ARGS ]\n"
             "Compile & run FILE, or omit FILE to load default.lpak\n"
             "--pak                  Compile to pakfile, don't run.\n"
-            "--cpp                  Compile to C++ code, don't run (see implementation.md!).\n"
-            "--import RELDIR        Additional dir (relative to FILE) to load imports from\n"
+            "--cpp                  Compile to C++ code, don't run (see implementation.md).\n"
+            "--import RELDIR        Additional dir (relative to FILE) to load imports from.\n"
             "--main MAIN            if present, run this main program file after compiling FILE.\n"
             "--parsedump            Also dump parse tree.\n"
             "--disasm               Also dump bytecode disassembly.\n"
