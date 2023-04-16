@@ -18,14 +18,15 @@ on how to use it, or skip straight to the
 Lobster is licensed under the Apache v2 license.
 
 Wouter van Oortmerssen
-[![Twitter Follow](https://img.shields.io/twitter/follow/wvo.svg?style=social)](https://twitter.com/wvo)
+
 [![Github Repository](https://img.shields.io/github/stars/aardappel/lobster?style=social)](https://github.com/aardappel/lobster/)
+[![Twitter Follow](https://img.shields.io/twitter/follow/wvo.svg?style=social)](https://twitter.com/wvo)
 
 ---
 
 ## Lobster2
 
-I'll try to develop Lobster in three ways (see [Plans.md](Plans.md)):
+I'll try to "improve" Lobster in three ways (see [Plans.md](Plans.md)):
 
 * Fix some errors/issues (e.g. 100e100 is not recognized as float);
 * Add syntax changes, saving compatibility with the original (e.g. #ff as hex);
