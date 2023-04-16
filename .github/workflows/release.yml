@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*"
+
+jobs:
+  build:
+    name: Release Windows
+    runs-on: windows-2022
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.3
+    - name: build
+      working-directory: dev/lobster
+      run: msbuild.exe lobster.sln /p:Configuration=Release /p:Platform=x64
+    - name: test
+      run: bin/lobster.exe tests/unittest.lobster
+    - name: Zip
+      run: powershell Compress-Archive -Path bin, data, docs, modules, samples, tests, README.md -DestinationPath lobster_windows_release.zip
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        name: Windows Release ${{ github.event.release.tag_name }}
+        files: |
+          lobster_windows_release.zip
