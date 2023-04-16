@@ -18,9 +18,8 @@ on how to use it, or skip straight to the
 Lobster is licensed under the Apache v2 license.
 
 Wouter van Oortmerssen
-
-[![Discord Chat](https://img.shields.io/discord/656280102451281940.svg)](https://discord.gg/szJPYdX)
-[![Twitter Follow](https://img.shields.io/twitter/follow/wvo.svg?style=social)](https://twitter.com/wvo)
+[twitter](https://twitter.com/wvo)
+[github.com/aardappel/lobster/](https://github.com/aardappel/lobster/)
 
 ---
 
@@ -36,4 +35,10 @@ G.P.
 
 <!--
 https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
+
+in C:\Dev\mine\lobster2:
+main sln: dev\lobster\lobster.sln
+compiled sln: dev\compiled_lobster\compiled_lobster\compiled_lobster.sln
+compiled src: dev\compiled_lobster\src\compiled_lobster.cpp
+compiled to: dev\compiled_lobster\compiled_lobster\x64\Release\compiled_lobster.exe
 -->
