@@ -1045,6 +1045,8 @@ template<typename T> T parse_int_not_nt(string_view sv, int base = 10) {
     auto orig = term;
     term = 0;
     auto v = (T)strtoll(sv.data(), nullptr, base);
+    if( errno==ERANGE ) // for >=2**63
+      v = (T)strtoull( sv.data(), nullptr, base );
     term = orig;
     return v;
 }
