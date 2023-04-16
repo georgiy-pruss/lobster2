@@ -19,21 +19,8 @@ Lobster is licensed under the Apache v2 license.
 
 Wouter van Oortmerssen
 
+![CI](https://github.com/aardappel/lobster/workflows/CI/badge.svg)
+[![Build Status](https://travis-ci.com/aardappel/lobster.svg?branch=master)](https://travis-ci.com/aardappel/lobster)
+[![Gitter](https://badges.gitter.im/lobster_programming_language/community.svg)](https://gitter.im/lobster_programming_language/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Discord Chat](https://img.shields.io/discord/656280102451281940.svg)](https://discord.gg/szJPYdX)
 [![Twitter Follow](https://img.shields.io/twitter/follow/wvo.svg?style=social)](https://twitter.com/wvo)
-
----
-
-## Lobster2
-
-I'll try to develop Lobster in three ways (see [Plans.md](Plans.md)):
-
-* Fix some errors/issues (e.g. 100e100 is not recognized as float);
-* Add syntax changes, saving compatibility with the original (e.g. #ff as hex);
-* Extend/shrink the language, breaking the compatibility... we'll see.
-
-G.P.
-
-<!--
-https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax
--->
