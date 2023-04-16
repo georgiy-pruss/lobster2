@@ -18,8 +18,8 @@ on how to use it, or skip straight to the
 Lobster is licensed under the Apache v2 license.
 
 Wouter van Oortmerssen
-[twitter](https://twitter.com/wvo)
-[github.com/aardappel/lobster/](https://github.com/aardappel/lobster/)
+[![Twitter Follow](https://img.shields.io/twitter/follow/wvo.svg?style=social)](https://twitter.com/wvo)
+[![Github Repository](https://img.shields.io/github/stars/aardappel/lobster?style=social)](https://github.com/aardappel/lobster/)
 
 ---
 
