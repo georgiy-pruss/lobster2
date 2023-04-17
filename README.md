@@ -19,18 +19,20 @@ Lobster is licensed under the Apache v2 license.
 
 Wouter van Oortmerssen
 
-[![Github Repository](https://img.shields.io/github/stars/aardappel/lobster?style=social)](https://github.com/aardappel/lobster/)
+[:lobster:](https://github.com/aardappel/lobster/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/wvo.svg?style=social)](https://twitter.com/wvo)
 
 ---
 
 ## Lobster2
 
-I'll try to "improve" Lobster in three ways (see [Plans.md](Plans.md)):
+I'll try to "improve" Lobster in three ways:
 
 * Fix some errors/issues (e.g. 100e100 is not recognized as float);
 * Add syntax changes, saving compatibility with the original (e.g. #ff as hex);
 * Extend/shrink the language, breaking the compatibility... we'll see.
+
+More info: [Plans.md](Plans.md).
 
 G.P.
 
@@ -43,3 +45,4 @@ compiled sln: dev\compiled_lobster\compiled_lobster\compiled_lobster.sln
 compiled src: dev\compiled_lobster\src\compiled_lobster.cpp
 compiled to: dev\compiled_lobster\compiled_lobster\x64\Release\compiled_lobster.exe
 -->
+

@@ -78,9 +78,11 @@ struct Lex : LoadedFile {
     vector<pair<string, string>> &filenames;
 
     bool do_string_interpolation = true;
+    int max_errors = 1;
+    int num_errors = 0;
 
-    Lex(string_view fn, vector<pair<string, string>> &fns, string_view _ss = {})
-        : LoadedFile(fn, fns, _ss), filenames(fns) {
+    Lex(string_view fn, vector<pair<string, string>> &fns, string_view _ss = {}, int max_errors = 1)
+        : LoadedFile(fn, fns, _ss), filenames(fns), max_errors(max_errors) {
         allsources.push_back(source);
         if (!fn.empty()) allfiles.insert(string(fn));
         FirstToken();
@@ -438,33 +440,22 @@ struct Lex : LoadedFile {
                     }
                     return T_IDENT;
                 }
-                bool isfloat = c == '.' && *p != '.'; // G-: depr
-                if( c=='#' ) // G-: TODO allow base#number for base in 2..36
-                {
-                  string number;
-                  for( ; IsXDigit(*p) || *p=='_'; ++p )
-                    if( *p != '_' ) number += *p;
-                  sattr = string_view( tokenstart, p - tokenstart );
-                  ival = parse_int_not_nt<int64_t>(number,16);
-                  return T_INT;
-                }
+                bool isfloat = c == '.' && *p != '.';
                 if (IsDigit(c) || (isfloat && IsDigit(*p))) {
-                    if (c == '0' && *p == 'x') { // G-: depr
+                    if (c == '0' && *p == 'x') {
                         p++;
-                        string number;
-                        for( ; IsXDigit(*p) || *p == '_'; ++p )
-                          if( *p != '_' ) number += *p;
-                        sattr = string_view( tokenstart, p - tokenstart );
-                        ival = parse_int_not_nt<int64_t>(number,16);
+                        while (IsXDigit(*p)) p++;
+                        sattr = string_view(tokenstart, p - tokenstart);
+                        ival = parse_int_not_nt<int64_t>(sattr, 16);
                         return T_INT;
-                    } else { // G-: TODO allow '_'
+                    } else {
                         while (IsDigit(*p)) p++;
                         if (!isfloat && *p == '.' && *(p + 1) != '.' && !IsAlpha(*(p + 1))) {
                             p++;
                             isfloat = true;
                             while (IsDigit(*p)) p++;
                         }
-                        if (isfloat && (*p == 'e' || *p == 'E')) { // G-: TODO 123e123 -- must be float
+                        if (isfloat && (*p == 'e' || *p == 'E')) {
                             p++;
                             if (*p == '+' || *p == '-') p++;
                             while (IsDigit(*p)) p++;
@@ -646,6 +637,7 @@ struct Lex : LoadedFile {
     }
 
     void Error(string_view msg, const Line *ln = nullptr) {
+        num_errors++;
         auto err = Location(ln ? *ln : *this) + ": error: " + msg;
         if (!ln) {
             auto begin = prevtokenstart;
