@@ -20,7 +20,6 @@ Lobster is licensed under the Apache v2 license.
 Wouter van Oortmerssen
 
 [:lobster:](https://github.com/aardappel/lobster/)
-[![Twitter Follow](https://img.shields.io/twitter/follow/wvo.svg?style=social)](https://twitter.com/wvo)
 
 ---
 
