@@ -43,19 +43,19 @@
 * maybe 'bytes' vs "unicode"; maybe also `c` for chars
 * float32, int8..int128? uint?
 * B I I1 I2 I4 I8 I16 U U1... F F4 F8?
-* unsigned ops for ints: `+` `-` `&` `|` `~` (xor) `~` (not) stay, `*<<` `*>>` (rol, ror), `#<` `#>` `#<=` `#>=` `#*` `#/` `#%` `#>>`
-* `^`(power) `@` `$` ``` unused
-* maybe `# ` as comment start; `#!` as shebang
+* unsigned ops for ints: `+` `-` `&` `|` `~` (xor) `~` (not) stay, `*<<` `*>>` (new rol, ror), `#<` `#>` `#<=` `#>=` `#*` `#/` `#%` `#>>` (new uint ops)
+* `^`(power) `@` `$` ``` ` ``` unused; btw dots are good too: `.=` (let?), `.+`, `.<<` etc
+* maybe `# ` (hash+space) as comment start; `#!` as shebang
 * tuple?
 * `x??y` // y if x fails. or something like try(expr,exc_body): x = try(y/z): 0.0 or print"Zerodiv!"
 * x `in` xs, ch `in` str, x `in` a..b; `not in`?
 * ranges? `for(a..b)` `x[a..b]` `v=2*a..b`
-* indexing vectors/strings `[n]` `[n:m]` `[n:]` `[:m]`; negative index
-* long (extended, mp); mpf. try at least port mp/mpf as modules; literals NNNx
+* indexing vectors/strings `[n]` `[n:m]` `[n:]` `[:m]`; negative index -- from end
+* long (extended, mp); mpf (see [mpmath](https://github.com/mpmath/mpmath)). try at least port mp/mpf as modules; literals `NNNx`
 * rationals? complex? not big need at all
-* *dict* [k:v,...] // a must!
+* *dict* [k:v,...] // a must! maybe also sets
 * *string* fns and ops
 * *date/time* fns
 * short str (<7 or 6 chars) as values instead of pointer
-* vararg fns?
-* passing fns as args?
+* vararg fns? dunno. workaround: lists, i.e. vectors. btw max number of args is 7?
+* passing fns as args? Just don't know. workaround: fn(x): f(x)
