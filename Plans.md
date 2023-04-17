@@ -40,7 +40,7 @@
 * `until` expr: stmts
 * `print` x,y,z; `print` without newline
 * str for bytes and ustr for unicode?
-* maybe 'bytes' vs "unicode"; maybe also `c` for chars
+* maybe 'bytes' vs "unicode"; maybe also ``` `c` ``` for chars
 * float32, int8..int128? uint?
 * B I I1 I2 I4 I8 I16 U U1... F F4 F8?
 * unsigned ops for ints: `+` `-` `&` `|` `~` (xor) `~` (not) stay, `*<<` `*>>` (new rol, ror), `#<` `#>` `#<=` `#>=` `#*` `#/` `#%` `#>>` (new uint ops)
@@ -52,10 +52,10 @@
 * ranges? `for(a..b)` `x[a..b]` `v=2*a..b`
 * indexing vectors/strings `[n]` `[n:m]` `[n:]` `[:m]`; negative index -- from end
 * long (extended, mp); mpf (see [mpmath](https://github.com/mpmath/mpmath)). try at least port mp/mpf as modules; literals `NNNx`
-* rationals? complex? not big need at all
-* *dict* [k:v,...] // a must! maybe also sets
-* *string* fns and ops
-* *date/time* fns
+* rationals? complex? no big need at all
+* **dict** [k:v,...] // a must! maybe also sets
+* **string** fns and ops
+* **date/time** fns
 * short str (<7 or 6 chars) as values instead of pointer
 * vararg fns? dunno. workaround: lists, i.e. vectors. btw max number of args is 7?
 * passing fns as args? Just don't know. workaround: fn(x): f(x)
