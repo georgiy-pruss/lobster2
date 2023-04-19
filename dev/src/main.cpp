@@ -144,7 +144,7 @@ int main(int argc, char* argv[]) {
                 } else if (a == "--errors") {
                     arg++;
                     if (arg >= argc) THROW_OR_ABORT("missing error count");
-                    max_errors = std::max(1, std::max(100, parse_int<int>(string_view_nt(argv[arg]))));
+                    max_errors = std::max(1, std::max(100, parse_int<int>(string_view(argv[arg]))));
                 } else if (a == "--query") {
                     arg++;
                     if (argc - arg < 4)
@@ -184,14 +184,14 @@ int main(int argc, char* argv[]) {
                           from_bundle,
                           loader))
             THROW_OR_ABORT("cannot find location to read/write data on this platform!");
-        if (!mainfile.empty() && !fn.empty()) AddDataDir(StripFilePart(fn), false);
+        if (!mainfile.empty() && !fn.empty()) AddDataDir(StripFilePart(fn));
 
         if (dump_builtins) { DumpBuiltinDoc(nfr); return 0; }
         if (dump_names) { DumpBuiltinNames(nfr); return 0; }
 
         LOG_INFO("lobster version " GIT_COMMIT_INFOSTR);
 
-        for (auto &import : imports) AddDataDir(import, true);
+        for (auto &import : imports) AddDataDir(import);
         if (!fn.empty()) fn = StripDirPart(fn);
 
         string bytecode_buffer;
