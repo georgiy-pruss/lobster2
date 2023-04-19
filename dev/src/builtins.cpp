@@ -446,8 +446,8 @@ nfr("string_to_int", "s,base", "SI?", "IB",
         int base = b.True() ? b.intval() : 10;
         if (base < 2 || base > 36)
             vm.BuiltinError("string_to_int: values out of range");
-        char *end;
-        auto svnt = s.sval()->strvnt();
+        const char *end;
+        auto svnt = s.sval()->strv();
         auto i = parse_int<iint>(svnt, base, &end);
         Push(sp,  i);
         return Value(end == svnt.data() + svnt.size());
@@ -457,9 +457,9 @@ nfr("string_to_float", "s", "S", "FB",
     "converts a string to a float. returns 0.0 if no numeric data could be parsed;"
     "second return value is true if all characters of the string were parsed.",
     [](StackPtr &sp, VM &, Value &s) {
-        char *end;
+        const char *end;
         auto sv = s.sval()->strv();
-        auto f = strtod(sv.data(), &end);
+        auto f = parse_float<double>(sv, &end);
         Push(sp, f);
         return Value(end == sv.data() + sv.size());
     });

@@ -960,7 +960,6 @@ template<typename T> auto to_string_conv(const T *p) {
 
 template<typename T> auto to_string_conv(T i) {
     static_assert(is_scalar<T>::value, "");
-    // FIXME: use to_chars.
     return [s = to_string(i)]() { return string_view(s); };  // Caches to_string!
 }
 
@@ -1035,18 +1034,29 @@ inline bool starts_with(string_view sv, string_view start) {
 }
 
 
-// This should be using from_chars(), which apparently is not supported by
-// gcc/clang yet :(
-template<typename T> T parse_int(string_view_nt sv, int base = 10, char **end = nullptr) {
-    return (T)strtoll(sv.c_str(), end, base);
+
+template<typename T> T parse_int(string_view sv, int base = 10, const char **end = nullptr) {
+    T val = 0;
+    auto res = from_chars(sv.data(), sv.data() + sv.size(), val, base);
+    if (end) *end = res.ptr;
+    return val;
 }
-template<typename T> T parse_int_not_nt(string_view sv, int base = 10) {
-    auto &term = *(char *)(sv.data() + sv.size());
-    auto orig = term;
-    term = 0;
-    auto v = (T)strtoll(sv.data(), nullptr, base);
-    term = orig;
-    return v;
+
+template<typename T> T parse_float(string_view sv, const char **end = nullptr) {
+    // FIXME: Upgrade compilers for these platforms on CI.
+    #if defined(__APPLE__) || defined(__ANDROID__) || defined(__EMSCRIPTEN__)
+        auto &term = *(char *)(sv.data() + sv.size());
+        auto orig = term;
+        term = 0;
+        auto v = (T)strtod(sv.data(), (char **)end);
+        term = orig;
+        return v;
+    #else
+        T val = 0;
+        auto res = from_chars(sv.data(), sv.data() + sv.size(), val);
+        if (end) *end = res.ptr;
+        return val;
+    #endif
 }
 
 // Strict aliasing safe memory reading and writing.
