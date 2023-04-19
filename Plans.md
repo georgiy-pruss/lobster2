@@ -13,6 +13,7 @@
 * `import m1,m2,m3`
 * `enum Color: RED, BLUE, WHITE`
 * `var i,j,k:int, a,b,c:float`
+* note, in args it's ok, so semantics must be the same i.e. i,j,a,b - auto; (a,b,c):int?
 * `let P=1,Q=2`? workaround `let P,Q=1,2` even for different types
 * `aaaa: bbb; ccc; ddd` // statements, maybe { bbb; ccc; ddd }
 * `x?y!z` `x&&y` `x||y` `!x`
