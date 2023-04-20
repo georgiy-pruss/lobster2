@@ -460,7 +460,8 @@ struct Lex : LoadedFile {
                         ival = parse_iint(number,16);
                         return T_INT;
                     } else {
-                        string number ;
+                        string number;
+                        number += c; 
                         for( ; IsDigit(*p) || *p=='_'; ++p )
                           if( *p != '_' ) number += *p;
                         if( !isfloat && *p == '.' && *(p+1) != '.' && !IsAlpha(*(p+1)) )
