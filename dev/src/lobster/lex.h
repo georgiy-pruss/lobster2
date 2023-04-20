@@ -440,32 +440,54 @@ struct Lex : LoadedFile {
                     }
                     return T_IDENT;
                 }
-                bool isfloat = c == '.' && *p != '.';
+                bool isfloat = c == '.' && *p != '.'; // G-: depr; maybe IsDigit(*p)?
+                if( c=='#' ) // G-: TODO (far future) allow base#number for base in 2..36
+                {
+                  string number;
+                  for( ; IsXDigit(*p) || *p=='_'; ++p )
+                    if( *p != '_' ) number += *p;
+                  sattr = string_view( tokenstart, p - tokenstart );
+                  ival = parse_iint(number,16);
+                  return T_INT;
+                }
                 if (IsDigit(c) || (isfloat && IsDigit(*p))) {
-                    if (c == '0' && *p == 'x') {
+                    if (c == '0' && *p == 'x') { // G-: depr
                         p++;
-                        while (IsXDigit(*p)) p++;
-                        sattr = string_view(tokenstart, p - tokenstart);
-                        ival = parse_int<int64_t>(sattr.substr(2), 16);
+                        string number;
+                        for( ; IsXDigit(*p) || *p == '_'; ++p )
+                          if( *p != '_' ) number += *p;
+                        sattr = string_view( tokenstart, p - tokenstart );
+                        ival = parse_iint(number,16);
                         return T_INT;
                     } else {
-                        while (IsDigit(*p)) p++;
-                        if (!isfloat && *p == '.' && *(p + 1) != '.' && !IsAlpha(*(p + 1))) {
-                            p++;
+                        string number ;
+                        for( ; IsDigit(*p) || *p=='_'; ++p )
+                          if( *p != '_' ) number += *p;
+                        if( !isfloat && *p == '.' && *(p+1) != '.' && !IsAlpha(*(p+1)) )
+                        {
+                            number += *p++;
                             isfloat = true;
-                            while (IsDigit(*p)) p++;
+                            for( ; IsDigit(*p) || *p=='_'; ++p )
+                              if( *p != '_' ) number += *p;
                         }
-                        if (isfloat && (*p == 'e' || *p == 'E')) {
-                            p++;
-                            if (*p == '+' || *p == '-') p++;
-                            while (IsDigit(*p)) p++;
+                        if( *p == 'e' || *p == 'E' )
+                        {
+                            isfloat = true;
+                            number += *p++;
+                            if( *p == '+' || *p == '-' )
+                              number += *p++;
+                            while( IsDigit(*p) ) // no underscores in exponent
+                              number += *p++;
                         }
                         sattr = string_view(tokenstart, p - tokenstart);
-                        if (isfloat) {
-                            fval = parse_float<double>(sattr, nullptr);
+                        if( isfloat )
+                        {
+                            fval = parse_float<double>(number, nullptr);
                             return T_FLOAT;
-                        } else {
-                            ival = parse_int<int64_t>(sattr);
+                        }
+                        else
+                        {
+                            ival = parse_iint(number);
                             return T_INT;
                         }
                     }
