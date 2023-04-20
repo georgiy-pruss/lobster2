@@ -1,12 +1,10 @@
 ## Fixes
 
 * Don't print all 100+ digits of numbers like `100.0e100`
-* Make `100e100` parsable
-* `print"ok"` -- make it compiled (I know that the blanks after function names made for purpose. It doesn't work that way. Maybe it'll go to Extension. At least `if"a">"0":print("G")else:print("L")` works)
+* `print"ok"` -- make it compileable (I know that the blanks after function names made for purpose. It doesn't work that way. Maybe it'll go to Extension. At least `if"a">"0":print("G")else:print("L")` works)
 
 ## Syntax
 
-* `123_456_789` // next in TODO
 * `2#0011_1010`, `36#xyz` // bin, oct, any base 2 to 36, but not urgent
 * `"string with #n #r #t #xx ## #(expr) etc"` #b? #uuuuuu
 * `#"xx xxxx xx xx"` // hex string; also multi-line strings
@@ -24,7 +22,10 @@
 
 * `#ABBA_ACDC` -- hex literals start with `#`
 * `0x1234_5678` -- both old- and new-style hex numbers allow underscores
-* `int` numbers can be from -2^63 up to 2^64-1; in range 2^63..2^64-1 they can be treated as unsigned int, while as `int`s they are negative, see [hexint\_test.lobster](tests/hexint_test.lobster)
+* `123_456_789` and `123_456.789_101e123` -- underscores in decimal ints and [float\_test.lobster](tests/float_test.lobster) (not exponent)
+* Fixed: 100e100 is now parsed as float
+* `int` numbers can be from -2^63 up to 2^64-1; in range 2^63..2^64-1 they can be treated as unsigned int, while as `int`s they are negative, see [hexint\_test.lobster](tests/hexint_test.lobster) and [int\_test.lobster](tests/int_test.lobster)
+* Too big integers produce error
 
 ### Deprecate
 
