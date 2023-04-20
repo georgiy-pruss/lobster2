@@ -22,8 +22,8 @@
 
 * `#ABBA_ACDC` -- hex literals start with `#`
 * `0x1234_5678` -- both old- and new-style hex numbers allow underscores
-* `123_456_789` and `123_456.789_101e123` -- underscores in decimal ints and [float\_test.lobster](tests/float_test.lobster) (not exponent)
-* Fixed: 100e100 is now parsed as float
+* `123_456_789` and `123_456.789_101e123` -- underscores in decimal ints and [floats](tests/float_test.lobster) (not exponent)
+* Fixed: `100e100` is now parsed as float
 * `int` numbers can be from -2^63 up to 2^64-1; in range 2^63..2^64-1 they can be treated as unsigned int, while as `int`s they are negative, see [hexint\_test.lobster](tests/hexint_test.lobster) and [int\_test.lobster](tests/int_test.lobster)
 * Too big integers produce error
 
