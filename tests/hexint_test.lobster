@@ -187,3 +187,6 @@ assert 0xFFFFFFFFFFFFFFFF == #FFFFFFFFFFFFFFFF
 assert 0xffffffffffffffff == #ffffffffffffffff
 
 assert #a+#0b+#00c == 33
+
+//print #FFFFFFFFFFFFFFFFFF  // Error: too big integer
+//print 0xFFFFFFFFFFFFFFFFFF // Error: too big integer

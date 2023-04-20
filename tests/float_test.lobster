@@ -28,3 +28,11 @@ assert -1234.567e11 == -1234567e8
 assert -0.000006 == -6e-6
 assert -0.000_006 == -6e-6
 
+assert 1e308 == 1e308
+assert 1e309 == 1e999   // inf
+assert -1e309 == -1e999 // -inf
+let nan = 0.0/0.0
+assert 0.0/0.0 != nan // nan != nan
+
+// need something like 1.inf 1.nan
+

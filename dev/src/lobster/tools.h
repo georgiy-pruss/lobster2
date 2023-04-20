@@ -1034,19 +1034,18 @@ inline bool starts_with(string_view sv, string_view start) {
 }
 
 inline
-iint parse_iint( string_view sv, int base=10 )
+int parse_iint( /*OUT*/ iint* value, string_view sv, int base=10 )
 {
-  iint val = 0;
-  auto res = from_chars( sv.data(), sv.data() + sv.size(), val, base );
-  // if( res.ec == std::errc::invalid_argument )
-  //   ... "That isn't a number."
+  auto res = from_chars( sv.data(), sv.data() + sv.size(), *value, base );
+  if( res.ec == std::errc::invalid_argument ) return EFAULT; // this isn't a number (when?)
   if( res.ec == std::errc::result_out_of_range )
   {
     uint64_t uval;
     res = from_chars( sv.data(), sv.data() + sv.size(), uval, base );
-    val = (iint)( uval );
+    if( res.ec == std::errc::result_out_of_range ) return E2BIG; // too big for uint64
+    *value = (iint)( uval );
   }
-  return val;
+  return 0; // OK
 }
 
 template<typename T> T parse_int(string_view sv, int base = 10, const char **end = nullptr) {

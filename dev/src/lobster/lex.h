@@ -447,7 +447,13 @@ struct Lex : LoadedFile {
                   for( ; IsXDigit(*p) || *p=='_'; ++p )
                     if( *p != '_' ) number += *p;
                   sattr = string_view( tokenstart, p - tokenstart );
-                  ival = parse_iint(number,16);
+                  auto rc = parse_iint( &ival, number, 16 );
+                  // if(rc==EFAULT) what errors can be there?
+                  if(rc==E2BIG)
+                  { // we know what toked has error, so set it (Error uses prevtoken)
+                    prevtokenstart = tokenstart; prevtokenend = p;
+                    Error("Too big integer");
+                  }
                   return T_INT;
                 }
                 if (IsDigit(c) || (isfloat && IsDigit(*p))) {
@@ -457,11 +463,15 @@ struct Lex : LoadedFile {
                         for( ; IsXDigit(*p) || *p == '_'; ++p )
                           if( *p != '_' ) number += *p;
                         sattr = string_view( tokenstart, p - tokenstart );
-                        ival = parse_iint(number,16);
+                        if( parse_iint( &ival, number, 16 ) == E2BIG )
+                        {
+                          prevtokenstart = tokenstart; prevtokenend = p;
+                          Error("Too big integer");
+                        }
                         return T_INT;
                     } else {
                         string number;
-                        number += c; 
+                        number += c;
                         for( ; IsDigit(*p) || *p=='_'; ++p )
                           if( *p != '_' ) number += *p;
                         if( !isfloat && *p == '.' && *(p+1) != '.' && !IsAlpha(*(p+1)) )
@@ -488,7 +498,11 @@ struct Lex : LoadedFile {
                         }
                         else
                         {
-                            ival = parse_iint(number);
+                            if( parse_iint( &ival, number ) == E2BIG )
+                            {
+                              prevtokenstart = tokenstart; prevtokenend = p;
+                              Error("Too big integer");
+                            }
                             return T_INT;
                         }
                     }
