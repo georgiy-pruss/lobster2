@@ -33,6 +33,15 @@ I'll try to "improve" Lobster in three ways:
 
 More info: [Plans.md](Plans.md).
 
+### Done
+
+* `#ABBA` -- hex literals can start with `#`
+* `#ffff_0000` `0x1234_5678_9ABC` -- both old- and new-style hex numbers can have underscores
+* `123_456_789` and `123_456.789_101e123` -- underscores in decimal ints and [floats](tests/float_test.lobster) (not in exponent)
+* Fixed: `100e100` is now successfully parsed as float
+* `int` numbers can be from -2^63 up to 2^64-1; in range 2^63..2^64-1 they can be treated as unsigned ints: while as `int`s they are negative, they allow bit-wise ops like `uint`s; [hexint\_test.lobster](tests/hexint_test.lobster) and [int\_test.lobster](tests/int_test.lobster)
+* Too big integers produce error
+
 G.P.
 
 <!--
