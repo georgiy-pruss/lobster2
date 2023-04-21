@@ -1,7 +1,7 @@
 ## Fixes
 
 * Don't print all 100+ digits of numbers like `100.0e100`
-* `print"ok"` -- make it compileable (I know that the blanks after function names made for purpose. It doesn't work that way. Maybe it'll go to Extension. At least `if"a">"0":foo()else:bar()` works) In general, everywhere <id><expr> is a function call with one argument, but as a statement (from start of line) the function can have many arguments <id><expr>[,<expr>]... Yet to decide: <id>(...)...:
+* `print"ok"` -- make it compileable (I know that the blanks after function names made for purpose. It doesn't work that way. Maybe it'll go to Extension. At least `if"a">"0":foo()else:bar()` works) In general, everywhere ⟨id⟩⟨expr⟩ is a function call with one argument, but as a statement (from start of line) the function can have many arguments ⟨id⟩⟨expr⟩[,⟨expr⟩]... Yet to decide: ⟨id⟩(...)...:
 
 ## Syntax
 
