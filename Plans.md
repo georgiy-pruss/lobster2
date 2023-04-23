@@ -2,6 +2,7 @@
 
 * Don't print all 100+ digits of numbers like `100.0e100`
 * `print"ok"` -- make it compileable (I know that the blanks after function names made for purpose. It doesn't work that way. Maybe it'll go to Extension. At least `if"a">"0":foo()else:bar()` works) In general, everywhere ⟨id⟩⟨expr⟩ is a function call with one argument, but as a statement (from start of line) the function can have many arguments ⟨id⟩⟨expr⟩[,⟨expr⟩]... Yet to decide: ⟨id⟩(...)...:
+<!-- can't use named function `print` as value -->
 
 ## Syntax
 
@@ -45,8 +46,8 @@
 * indexing vectors/strings `[n]` `[n:m]` `[n:]` `[:m]`; negative index -- from the end
 * `long` (extended?, mp); mpf (see [mpmath](https://github.com/mpmath/mpmath)). Try at least port mp/mpf as modules; literals probably `NNNx`
 * rationals? complex? no big need at all
-* **dict** [k:v,...] // a must! maybe also sets
-* **string** fns and ops
+* **dict** [k:v,...] // a must! python implementation is great. is it possible to use it? maybe also sets
+* **string** fns and ops (e.g. "aa,bb,cc"/"," is split)
 * **date/time** fns
 * short str (<7 or 6 chars) as values instead of pointer
 * vararg fns? dunno. workaround: lists, i.e. vectors. btw max number of args is 7?
