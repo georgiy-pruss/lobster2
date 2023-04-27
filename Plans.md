@@ -52,3 +52,6 @@
 * short str (<7 or 6 chars) as values instead of pointer
 * vararg fns? dunno. workaround: lists, i.e. vectors. btw max number of args is 7?
 * passing fns as args? Just don't know. workaround: fn(x): f(x)
+* var: ... (new lines with indent); let: .... (new lines with indent); i.e. like Pascal
+* same for lists, dicts: name =: (values on new lines with indents; v1:v2 for dists)
+* maybe the same for objects: ... Object: then name:value on new lines
