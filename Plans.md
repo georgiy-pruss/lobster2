@@ -39,6 +39,7 @@
 * unsigned ops for ints: `+` `-` `&` `|` `~` (xor) `~` (not) stay, `*<<` `*>>` (new rol, ror), `#<` `#>` `#<=` `#>=` `#*` `#/` `#%` `#>>` (new uint ops) Yes, `~` is more logical for xor and `~x` is `x~#ffff...`
 * `^`(power) also `@` `$` ``` ` ``` are unused; btw dots can be good too: `.=` (let?), `.+`, `.<<` etc
 * maybe `# ` (hash+space) as comment start; `#!` as shebang
+* ~ for ints - xor, ~ for floats - approx. eq?, ~ for str - re match
 * tuple?
 * `x??y` // y if x fails. or something like try(expr,exc_body): x = try(y/z): 0.0 or print"Zerodiv!"
 * x `in` xs, ch `in` str, x `in` a..b; `not in`?
