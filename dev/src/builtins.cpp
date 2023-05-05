@@ -1256,6 +1256,14 @@ nfr("hash", "v", "F}", "I",
         Push(sp, positive_bits(a.Hash(vm, V_FLOAT)));
     });
 
+nfr("call_function_value", "x", "L", "",
+    "calls a void / no args function value.. you shouldn't need to use this, it is"
+    " a demonstration of how native code can call back into Lobster",
+    [](StackPtr &, VM &vm, Value &f) {
+        vm.CallFunctionValue(f);
+        return NilVal();
+    });
+
 nfr("type_string", "ref", "A", "S",
     "string representing the type of the given reference (object/vector/string/resource)",
     [](StackPtr &sp, VM &vm) {
@@ -1375,6 +1383,23 @@ nfr("date_time_string", "utc", "B?", "S",
         if (!tm) return Value(vm.NewString(""));
         auto ts = std::asctime(tm);
         auto s = vm.NewString(string_view(ts, 24));
+        return Value(s);
+    });
+
+nfr("date_time_string_format", "format,utc", "SB?", "S",
+    "a string representing date & time information using a formatting string according to"
+    " https://en.cppreference.com/w/cpp/chrono/c/strftime, for example \"%Y_%m_%d_%H_%M_%S\"."
+    " By default returns local time, pass true for UTC instead.",
+    [](StackPtr &, VM &vm, Value &fmt, Value &utc) {
+        auto time = std::time(nullptr);
+        if (!time) return Value(vm.NewString(""));
+        auto tm = utc.True() ? std::gmtime(&time) : std::localtime(&time);
+        if (!tm) return Value(vm.NewString(""));
+        const size_t max = 1024;
+        char buf[max];
+        auto sz = std::strftime(buf, max, fmt.sval()->strvnt().c_str(), tm);
+        if (!sz) return Value(vm.NewString(""));
+        auto s = vm.NewString(string_view(buf, sz));
         return Value(s);
     });
 
